@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-en="Raed Alfeel - Accountant & Developer" data-de="Raed Alfeel - Buchhalter & Entwickler">Raed Alfeel -
+        Buchhalter & Entwickler</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1e40af;
+            --secondary-teal: #0d9488;
+            --accent-orange: #f59e0b;
+            --dark-gray: #374151;
+            --light-gray: #f8fafc;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background: var(--white);
+        }
+
+        /* Language Switcher */
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid var(--primary-blue);
+            color: var(--primary-blue);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .lang-btn.active {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .lang-btn:hover {
+            background: var(--primary-blue);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 60px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+            color: white;
+            padding: 180px 0 80px;
+            text-align: center;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .hero-text {
+            flex: 1;
+            text-align: left;
+        }
+
+        .hero-image {
+            flex: 0 0 300px;
+        }
+
+        .profile-photo {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            animation: fadeInRight 1s ease 0.3s both;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--accent-orange);
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .cta-button:hover {
+            background: #e08e0b;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.3);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            background: var(--light-gray);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary-blue);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--secondary-teal), var(--primary-blue));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--dark-gray);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .contact h2 {
+            margin-bottom: 2rem;
+            font-size: 2.2rem;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Language content hiding */
+        [data-lang="en"] {
+            display: none;
+        }
+
+        body.lang-en [data-lang="de"] {
+            display: none;
+        }
+
+        body.lang-en [data-lang="en"] {
+            display: block;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .hero-text {
+                text-align: center;
+            }
+
+            .hero-image {
+                flex: none;
+            }
+
+            .profile-photo {
+                width: 250px;
+                height: 250px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .language-switcher {
+                top: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button class="lang-btn active" onclick="switchLanguage('de')">DE</button>
+        <button class="lang-btn" onclick="switchLanguage('en')">EN</button>
+    </div>
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span data-lang="de">Raed Alfeel</span>
+                    <span data-lang="en">Raed Alfeel</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">
+                                <span data-lang="de">Startseite</span>
+                                <span data-lang="en">Home</span>
+                            </a></li>
+                        <li><a href="#services">
+                                <span data-lang="de">Leistungen</span>
+                                <span data-lang="en">Services</span>
+                            </a></li>
+                        <li><a href="#contact">
+                                <span data-lang="de">Kontakt</span>
+                                <span data-lang="en">Contact</span>
+                            </a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>
+                        <span data-lang="de">Buchhalter & Full-Stack Entwickler</span>
+                        <span data-lang="en">Accountant & Full-Stack Developer</span>
+                    </h1>
+                    <p class="subtitle">
+                        <span data-lang="de">Verbindung von Finanzen & Technologie durch Automatisierung &
+                            Innovation</span>
+                        <span data-lang="en">Bridging Finance & Technology through Automation & Innovation</span>
+                    </p>
+                    <a href="#contact" class="cta-button">
+                        <span data-lang="de">Lassen Sie uns zusammenarbeiten</span>
+                        <span data-lang="en">Let's Work Together</span>
+                    </a>
+                </div>
+                <div class="hero-image">
+                    <img src="./photos/personalPhoto.jpg" alt="Professional Photo" class="profile-photo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">
+                <span data-lang="de">Meine Leistungen</span>
+                <span data-lang="en">My Services</span>
+            </h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>
+                        <span data-lang="de">Finanzanalyse & Berichtswesen</span>
+                        <span data-lang="en">Financial Analysis & Reporting</span>
+                    </h3>
+                    <p>
+                        <span data-lang="de">Umfassende Finanzanalyse, automatisierte Berichtssysteme und datenbasierte
+                            Erkenntnisse für strategische Entscheidungsfindung.</span>
+                        <span data-lang="en">Comprehensive financial analysis, automated reporting systems, and
+                            data-driven insights for strategic decision making.</span>
+                    </p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🤖</div>
+                    <h3>
+                        <span data-lang="de">Prozessautomatisierung</span>
+                        <span data-lang="en">Process Automation</span>
+                    </h3>
+                    <p>
+                        <span data-lang="de">Maßgeschneiderte Automatisierungslösungen zur Optimierung von
+                            Buchhaltungsprozessen und Verbesserung der Genauigkeit.</span>
+                        <span data-lang="en">Custom automation solutions to streamline accounting processes, reduce
+                            manual work, and improve accuracy.</span>
+                    </p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💻</div>
+                    <h3>
+                        <span data-lang="de">Webentwicklung</span>
+                        <span data-lang="en">Web Development</span>
+                    </h3>
+                    <p>
+                        <span data-lang="de">Full-Stack Webanwendungen, Finanz-Dashboards und maßgeschneiderte
+                            Geschäftslösungen für Ihre Bedürfnisse.</span>
+                        <span data-lang="en">Full-stack web applications, financial dashboards, and custom business
+                            solutions tailored to your needs.</span>
+                    </p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔧</div>
+                    <h3>
+                        <span data-lang="de">Systemintegration</span>
+                        <span data-lang="en">System Integration</span>
+                    </h3>
+                    <p>
+                        <span data-lang="de">Nahtlose Integration von Buchhaltungssystemen mit modernen Webtechnologien
+                            und Datenbanken.</span>
+                        <span data-lang="en">Seamless integration of accounting systems with modern web technologies and
+                            databases.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>
+                <span data-lang="de">Bereit, Ihr Unternehmen zu optimieren?</span>
+                <span data-lang="en">Ready to Streamline Your Business?</span>
+            </h2>
+            <p>
+                <span data-lang="de">Lassen Sie uns besprechen, wie ich Ihre Prozesse automatisieren und
+                    maßgeschneiderte Lösungen entwickeln kann.</span>
+                <span data-lang="en">Let's discuss how I can help automate your processes and build custom
+                    solutions.</span>
+            </p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📧</span>
+                    <span>RaedAlfeel@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <span>📱</span>
+                    <span>+49 (0) 156 78413293 </span>
+                </div>
+                <div class="contact-item">
+                    <span>💼</span>
+                    <a href="https://www.linkedin.com/in/raedalfeel/" target="_blank" style="color: white; text-decoration: none;">
+                        <span data-lang="de">LinkedIn Profil</span>
+                        <span data-lang="en">LinkedIn Profile</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Language switching functionality
+        function switchLanguage(lang) {
+            document.body.className = lang === 'en' ? 'lang-en' : '';
+            document.documentElement.lang = lang;
+
+            // Update active language button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[onclick="switchLanguage('${lang}')"]`).classList.add('active');
+
+            // Store language preference
+            localStorage.setItem('preferredLanguage', lang);
+
+            // Update page title
+            const title = document.querySelector('title');
+            if (lang === 'en') {
+                title.textContent = title.getAttribute('data-en');
+            } else {
+                title.textContent = title.getAttribute('data-de');
+            }
+        }
+
+        // Load saved language preference
+        document.addEventListener('DOMContentLoaded', function () {
+            const savedLang = localStorage.getItem('preferredLanguage') || 'de';
+            switchLanguage(savedLang);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(30, 64, 175, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, var(--primary-blue), var(--secondary-teal))';
+                header.style.backdropFilter = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>
